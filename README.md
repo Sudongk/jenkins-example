@@ -3,6 +3,11 @@
 클라우드 환경에서 젠킨스 다운로드
 1. Jenkins서버를 위한 8080 포트 모든 경로로 개방
 2. test를 위한 api 서버를 위한 8081 포트 모든 경로로 개방
+3. ssh을 통해 클라우드 인스턴스 접속
+
+ssh을 통해 클라우드 인스턴스 접속
+
+    ssh -i {ssh private key} {passphrase for key}@{외부 ip} 
 
 Jenkins GPG Key 다운로드 및 시스템에 추가
 

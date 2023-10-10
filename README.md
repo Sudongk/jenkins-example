@@ -61,11 +61,7 @@ Pipeline script
     
                 post {
                     success {
-                        // sh
                         echo 'success'
-                        // sh ("kill -9 $(ps -ef | grep "java -jar" | grep -v grep | awk '{print $2}')")
-                        
-                        // sh ('java -jar */build/libs/*T.jar &')
                     }
                     
                     failure {

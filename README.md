@@ -1,6 +1,6 @@
 ﻿# jenkins-study
 
-클라우드 환경에서 젠킨스 다운로드
+클라우드 환경(Google Cloud Platform)에서 젠킨스 다운로드
 1. Jenkins서버를 위한 8080 포트 모든 경로로 개방
 2. test를 위한 api 서버를 위한 8081 포트 모든 경로로 개방
 3. ssh을 통해 클라우드 인스턴스 접속

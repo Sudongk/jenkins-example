@@ -35,7 +35,7 @@ Jenkins 파이프라인 작성
 2. Jenkins 콘솔에서 새아이템 생성 후 Build Triggers - GitHub hook trigger for GITScm polling 체크
 3. 파이브라인 작성
 
-파이브라인 스크립트
+Pipeline script
 
     pipeline {
         agent any

@@ -84,9 +84,63 @@ Pipeline script
         }
     }
 
-start 스크립트 작성
+Jenkins 플러그인 Publish over SSH을 이용한 gitHub Webhook을 이용한 Jenkins 빌드 서버에서 빌드 후 jar 파일만 배포 서버로 전송
+
+Pipeline script
+
+    pipeline {
+        agent any
+    
+        stages {
+            stage('Cloning') {
+                steps {
+                    git url: 'https://github.com/Sudongk/api-for-gcp.git',
+                        branch: 'main'
+                }
+            }
+            
+            stage('Build') {
+                steps {
+                    sh ('chmod 744 gradlew')
+                    sh './gradlew build'
+                }
+    
+                post {
+                    success {
+                        echo 'success'
+                    }
+                    
+                    failure {
+                        echo 'failure'
+                    }
+                }
+            }
+
+            // Jenkins 플러그인 Publish over SSH을 이용한 gitHub Webhook을 이용한 Jenkins 빌드 서버에서 빌드 후 jar 파일만 배포 서버로 전송
+            stage('Deploy') {
+                steps {
+                    sshPublisher(
+                        publishers : [
+                            sshPublisherDesc(
+                                configName: 'deploy',
+                                transfers : [
+                                    sshTransfer(
+                                        sourceFiles: 'build/libs/*T.jar',
+                                        remoteDirectory: '',
+                                        removePrefix:'build/libs',
+                                        execCommand: 'java -jar *.jar > app.out 2>&1 &'
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
+            }
+        }
+    }
+
+start.sh 스크립트 작성
 
     kill -9 $(ps -ef | grep "java -jar" | grep -v grep | awk '{print $2}')
     java -jar /usr/share/app.jar &
-
 
